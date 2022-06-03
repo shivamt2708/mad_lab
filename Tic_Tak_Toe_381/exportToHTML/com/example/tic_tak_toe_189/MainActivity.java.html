@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.tic_tak_toe_189;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity;</span>
+<span class="s0">import </span><span class="s1">androidx.gridlayout.widget.GridLayout;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast;</span>
+
+<span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+    <span class="s0">boolean </span><span class="s1">iswin = </span><span class="s0">false</span><span class="s1">;</span>
+    <span class="s0">int </span><span class="s1">imageclick = -</span><span class="s2">1</span><span class="s1">;</span>
+
+    <span class="s0">int</span><span class="s1">[]tournament = {-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">};</span>
+    <span class="s0">int </span><span class="s1">x=</span><span class="s2">0</span><span class="s1">;</span>
+
+    <span class="s0">int </span><span class="s1">p=</span><span class="s2">1</span><span class="s1">;</span>
+    <span class="s0">int </span><span class="s1">[][]winning = {{</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">},{</span><span class="s2">3</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">5</span><span class="s1">},{</span><span class="s2">6</span><span class="s1">,</span><span class="s2">7</span><span class="s1">,</span><span class="s2">8</span><span class="s1">},{</span><span class="s2">0</span><span class="s1">,</span><span class="s2">3</span><span class="s1">,</span><span class="s2">6</span><span class="s1">},{</span><span class="s2">1</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">7</span><span class="s1">},{</span><span class="s2">2</span><span class="s1">,</span><span class="s2">5</span><span class="s1">,</span><span class="s2">8</span><span class="s1">},{</span><span class="s2">0</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">8</span><span class="s1">},{</span><span class="s2">2</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">6</span><span class="s1">}};</span>
+    <span class="s0">int</span><span class="s1">[]game = {-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">,-</span><span class="s2">1</span><span class="s1">};</span>
+    <span class="s0">public void </span><span class="s1">load(View view)</span>
+    <span class="s1">{</span>
+        <span class="s0">if</span><span class="s1">(iswin == </span><span class="s0">false </span><span class="s1">&amp;&amp; imageclick == -</span><span class="s2">1</span><span class="s1">)</span>
+        <span class="s1">{</span>
+            <span class="s1">ImageView v = (ImageView) view;</span>
+            <span class="s0">int </span><span class="s1">tag = Integer.parseInt(v.getTag().toString());</span>
+            <span class="s1">imageclick = game[tag];</span>
+            <span class="s0">if </span><span class="s1">(p == </span><span class="s2">1</span><span class="s1">) {</span>
+                <span class="s1">v.setImageResource(R.drawable.cross);</span>
+                <span class="s1">game[tag] = p;</span>
+                <span class="s1">Toast.makeText(</span><span class="s0">this</span><span class="s1">, tag + </span><span class="s3">&quot; &quot; </span><span class="s1">+ </span><span class="s3">&quot;Cross&quot;</span><span class="s1">, Toast.LENGTH_SHORT).show();</span>
+                <span class="s1">p = </span><span class="s2">0</span><span class="s1">;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">v.setImageResource(R.drawable.zero);</span>
+                <span class="s1">game[tag] = p;</span>
+                <span class="s1">Toast.makeText(</span><span class="s0">this</span><span class="s1">, tag + </span><span class="s3">&quot; &quot; </span><span class="s1">+ </span><span class="s3">&quot;Zero&quot;</span><span class="s1">, Toast.LENGTH_SHORT).show();</span>
+                <span class="s1">p = </span><span class="s2">1</span><span class="s1">;</span>
+            <span class="s1">}</span>
+            <span class="s0">int </span><span class="s1">count=</span><span class="s2">0</span><span class="s1">;</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s2">0</span><span class="s1">; i &lt; winning.length; i++) {</span>
+                <span class="s0">if </span><span class="s1">(game[winning[i][</span><span class="s2">0</span><span class="s1">]] == game[winning[i][</span><span class="s2">1</span><span class="s1">]] &amp;&amp; game[winning[i][</span><span class="s2">1</span><span class="s1">]] == game[winning[i][</span><span class="s2">2</span><span class="s1">]] &amp;&amp; game[winning[i][</span><span class="s2">0</span><span class="s1">]] &gt; -</span><span class="s2">1</span><span class="s1">) {</span>
+<span class="s4">//                    Toast.makeText(this, &quot;Winner is &quot; + (p==0 ? 1 : 0), Toast.LENGTH_SHORT).show();</span>
+                    <span class="s1">tournament[x] = p;</span>
+                    <span class="s1">x++;</span>
+                    <span class="s0">if</span><span class="s1">(tournament[i]==</span><span class="s2">1</span><span class="s1">){</span>
+                        <span class="s1">count++;</span>
+                    <span class="s1">}</span>
+                    <span class="s1">iswin = </span><span class="s0">true</span><span class="s1">;</span>
+                    <span class="s0">if</span><span class="s1">(i==winning.length-</span><span class="s2">1</span><span class="s1">)</span>
+                    <span class="s1">{</span>
+                        <span class="s1">result(count);</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+<span class="s4">//        for(int i=0;i&lt;3;i++)</span>
+<span class="s4">//        {</span>
+<span class="s4">//            System.out.print(tournament[i]+&quot; &quot;);</span>
+<span class="s4">//        }</span>
+        <span class="s4">//int count=0;</span>
+        <span class="s4">/*for(int i=0;i&lt;3;i++) 
+        { 
+            if(tournament[i] == 1) 
+                count++; 
+        }*/</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">result(</span><span class="s0">int </span><span class="s1">count){</span>
+        <span class="s0">if</span><span class="s1">(count&gt;=</span><span class="s2">2</span><span class="s1">)</span>
+            <span class="s1">Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Winner is cross&quot; </span><span class="s1">, Toast.LENGTH_SHORT).show();</span>
+        <span class="s0">else</span>
+            <span class="s1">Toast.makeText(</span><span class="s0">this</span><span class="s1">, </span><span class="s3">&quot;Winner is zero&quot; </span><span class="s1">, Toast.LENGTH_SHORT).show();</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">restart(View view)</span>
+    <span class="s1">{</span>
+        <span class="s1">GridLayout grid = findViewById(R.id.gridlayout);</span>
+        <span class="s0">int </span><span class="s1">tot_img = grid.getChildCount();</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i =</span><span class="s2">0 </span><span class="s1">; i&lt; tot_img ; i++)</span>
+        <span class="s1">{</span>
+            <span class="s1">ImageView v1 = (ImageView) grid.getChildAt(i);</span>
+            <span class="s1">v1.setImageDrawable(</span><span class="s0">null</span><span class="s1">);</span>
+        <span class="s1">}</span>
+        <span class="s1">iswin = </span><span class="s0">false</span><span class="s1">;</span>
+        <span class="s1">imageclick = -</span><span class="s2">1</span><span class="s1">;</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i =</span><span class="s2">0 </span><span class="s1">;i&lt;game.length;i++)</span>
+            <span class="s1">game[i] = -</span><span class="s2">1</span><span class="s1">;</span>
+        <span class="s1">p=</span><span class="s2">1</span><span class="s1">;</span>
+    <span class="s1">}</span>
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState);</span>
+        <span class="s1">setContentView(R.layout.activity_main);</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
